@@ -6,14 +6,15 @@ const app = express();
 
 app.get('/');
 
-app.listen(PORT, () => {
-  console.log('App is listening to port: ${PORT}')
-})
+
 
 mongoose
 .connect(mongoURL)
 .then(() => {
     console.log('Server is connected to database');
+    app.listen(PORT, () => {
+      console.log('App is listening to port: ${PORT}')
+    })
 })
 .catch((error) => {
     console.log(error);
