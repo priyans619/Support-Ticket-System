@@ -4,7 +4,12 @@ import dotenv from 'dotenv';
 
 const app = express();
 
-app.get('/');
+app.get('/',(request, response) => {
+  console.log(request)
+  return response.status(201).send('Welcome to Support Ticket Entry System')
+});
+
+app.use(express.json());
 
 // for loading process.env from config
 dotenv.config();
