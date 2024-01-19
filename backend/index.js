@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import agentRoute from './routes/agentRoute.js';
+
 
 const app = express();
 
@@ -10,6 +12,10 @@ app.get('/',(request, response) => {
 });
 
 app.use(express.json());
+
+// Middleware
+
+app.use('/api', agentRoute);
 
 // for loading process.env from config
 dotenv.config();
