@@ -59,35 +59,4 @@ router.post('/support-tickets', async (request, response) => {
 });
 
 
-router.get('/support-tickets', async (request, response) => {
-  try {
-    const { status, assignedTo, severity, type, sort, order, page = 1, limit = 10 } = request.query;
-
-    // Build query conditions based on filters
-    const queryConditions = {};
-    if (status) queryConditions.status = status;
-    if (assignedTo) queryConditions.assignedTo = assignedTo;
-    if (severity) queryConditions.severity = severity;
-    if (type) queryConditions.type = type;
-
-    // Build sort options based on sort and order
-    const sortOptions = {};
-    if (sort) sortOptions[sort] = order === 'desc' ? -1 : 1;
-
-    // Apply pagination
-    const skip = (page - 1) * limit;
-
-    // Fetch support tickets based on conditions, sort, and pagination
-    const tickets = await Ticket.find(queryConditions)
-      .sort(sortOptions)
-      .skip(skip)
-      .limit(limit);
-
-    response.status(200).json({ tickets });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
-});
-
 export default router;
