@@ -14,6 +14,8 @@ app.get('/',(request, response) => {
 
 app.use(express.json());
 
+app.use(cors());
+
 // Middleware
 
 app.use('/api', agentRoute);
